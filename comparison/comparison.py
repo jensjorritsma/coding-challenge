@@ -19,6 +19,7 @@ Constraints:
 
 def compare_values(x, y):
     """ Accepts two semantic strings as values """
+    """ Checks if values are valid version strings, failure returns False """
     results = check_valid(x, y)
     if not results:
         return False
@@ -60,4 +61,5 @@ def determine_valid(x):
     if len(version_split) >= 2:
         if (version_split[0] == "0") and (version_split[1] == "0"):
             return False
+    """ If valid string, return True """
     return True
