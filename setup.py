@@ -8,5 +8,5 @@ setup(name='coding-challenge',
       author='Jens Jorritsma',
       author_email='jens.jorritsma@rackspace.com',
       url='https://github.com/jensjorritsma/coding-challenge',
-      packages=['distutils', 'distutils.command'],
+      packages=['comparison'],
      )
