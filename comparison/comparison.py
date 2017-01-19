@@ -61,8 +61,3 @@ def determine_valid(x):
         if (version_split[0] == "0") and (version_split[1] == "0"):
             return False
     return True
-
-
-if __name__ == '__main__':
-    test = compare_values("3.2.1", "9.0")
-    print test
