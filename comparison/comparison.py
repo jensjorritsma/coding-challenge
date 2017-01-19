@@ -23,7 +23,7 @@ def compare_values(x, y):
     if not results:
         return False
     else:
-        compare_version(x, y)
+         return compare_version(x, y)
 
 
 def compare_version(x, y):
@@ -38,8 +38,12 @@ def compare_version(x, y):
 
 
 def check_valid(x, y):
-    determine_valid(x)
-    determine_valid(y)
+    if not determine_valid(x):
+        return False
+    elif not determine_valid(y):
+        return False
+    else:
+        return True
 
 
 def determine_valid(x):
@@ -56,8 +60,9 @@ def determine_valid(x):
     if len(version_split) >= 2:
         if (version_split[0] == "0") and (version_split[1] == "0"):
             return False
+    return True
 
 
 if __name__ == '__main__':
-    test = compare_values("0.9.11", "0.10")
+    test = compare_values("3.2.1", "9.0")
     print test
