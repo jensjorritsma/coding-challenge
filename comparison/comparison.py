@@ -34,9 +34,8 @@ def compare_version(x, y):
 
 
 def check_valid(x, y):
-    try:
-        determine_valid(x)
-        determine_valid(y)
+    determine_valid(x)
+    determine_valid(y)
 
 
 def determine_valid(x):
@@ -52,5 +51,5 @@ def determine_valid(x):
 
 
 if __name__ == '__main__':
-    test = compare_values("3.2.11", "0")
+    test = compare_values("0.9.11", "0.10.0")
     print test
