@@ -9,4 +9,4 @@ setup(name='coding-challenge',
       author_email='jens.jorritsma@rackspace.com',
       url='https://github.com/jensjorritsma/coding-challenge',
       packages=['comparison'],
-     )
+      )

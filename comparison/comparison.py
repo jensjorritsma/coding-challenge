@@ -18,8 +18,12 @@ Constraints:
 
 
 def compare_values(x, y):
-    check_valid(x, y)
-    return compare_version(x,y)
+    """ Accepts two semantic strings as values """
+    results = check_valid(x, y)
+    if not results:
+        return False
+    else:
+        compare_version(x, y)
 
 
 def compare_version(x, y):
@@ -39,17 +43,21 @@ def check_valid(x, y):
 
 
 def determine_valid(x):
+    """ Ensure that variables match semantic guidelines """
     version_split = x.split(".")
+    """ If version is only one place, fail """
     if len(version_split) < 2:
         return False
+    """ If version has a zero prefix, fail """
     for place in version_split:
         if (place[:1] == "0") and (len(place) > 1):
             return False
+    """ If first two places are zero, fail """
     if len(version_split) >= 2:
         if (version_split[0] == "0") and (version_split[1] == "0"):
             return False
 
 
 if __name__ == '__main__':
-    test = compare_values("0.9.11", "0.10.0")
+    test = compare_values("0.9.11", "0.10")
     print test
