@@ -19,7 +19,6 @@ Constraints:
 
 def compare_values(x, y, z):
     """ Accepts two semantic strings and a comparison operator as values """
-    """ Checks if values are valid version strings, failure returns False """
     results = check_valid(x, y)
     if not results:
         raise Exception("Invalid version string")
@@ -28,6 +27,8 @@ def compare_values(x, y, z):
 
 
 def compare_version(x, y, z):
+    """ Compares the first version string against the second using the """
+    """ provided comparison operator string """
     if z == "==":
         return find_equal(x, y)
     elif z == ">":
@@ -51,6 +52,7 @@ def compare_version(x, y, z):
 
 
 def find_greater(x, y):
+    """ Checks if first is greater """
     if x > y:
         return True
     else:
@@ -58,6 +60,7 @@ def find_greater(x, y):
 
 
 def find_less(x, y):
+    """ Checks if second is greater """
     if x < y:
         return True
     else:
@@ -65,6 +68,7 @@ def find_less(x, y):
 
 
 def find_equal(x, y):
+    """ Checks if both are equal """
     if x == y:
         return True
     else:
@@ -72,6 +76,7 @@ def find_equal(x, y):
 
 
 def find_pessimistic(x, y):
+    """ Determines if values are within pessimistic constraints """
     if not (find_less(x, y) or find_equal(x, y)):
         return False
     else:
@@ -87,6 +92,7 @@ def find_pessimistic(x, y):
 
 
 def check_valid(x, y):
+    """ Passes both values to the determine_valid method """
     if not determine_valid(x):
         raise Exception("First value not valid version string")
     elif not determine_valid(y):

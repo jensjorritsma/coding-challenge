@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='coding-challenge',
-      version='0.1',
+      version='1.0',
       description='Coding challenge',
       author='Jens Jorritsma',
       author_email='jens.jorritsma@rackspace.com',
