@@ -17,32 +17,80 @@ Constraints:
 '''
 
 
-def compare_values(x, y):
-    """ Accepts two semantic strings as values """
+def compare_values(x, y, z):
+    """ Accepts two semantic strings and a comparison operator as values """
     """ Checks if values are valid version strings, failure returns False """
     results = check_valid(x, y)
     if not results:
+        raise Exception("Invalid version string")
+    else:
+        return compare_version(x, y, z)
+
+
+def compare_version(x, y, z):
+    if z == "==":
+        return find_equal(x, y)
+    elif z == ">":
+        return find_greater(x, y)
+    elif z == ">=":
+        if find_equal(x, y) or find_greater(x, y):
+            return True
+        else:
+            return False
+    elif z == "<":
+        return find_less(x, y)
+    elif z == "<=":
+        if find_equal(x, y) or find_less(x, y):
+            return True
+        else:
+            return False
+    elif z == "~>":
+        return find_pessimistic(x, y)
+    else:
+        raise Exception("Invalid comparison operator string")
+
+
+def find_greater(x, y):
+    if x > y:
+        return True
+    else:
+        return False
+
+
+def find_less(x, y):
+    if x < y:
+        return True
+    else:
+        return False
+
+
+def find_equal(x, y):
+    if x == y:
+        return True
+    else:
+        return False
+
+
+def find_pessimistic(x, y):
+    if not (find_less(x, y) or find_equal(x, y)):
         return False
     else:
-         return compare_version(x, y)
-
-
-def compare_version(x, y):
-    if x > y:
-        return 1
-    elif x < y:
-        return -1
-    elif x == y:
-        return 0
-    else:
-        return "wat?"
+        first = x.split(".")
+        second = y.split(".")
+        if len(first) > len(second):
+            if find_equal(x, y) or find_less(x, y):
+                return True
+            else:
+                return False
+        else:
+            return True
 
 
 def check_valid(x, y):
     if not determine_valid(x):
-        return False
+        raise Exception("First value not valid version string")
     elif not determine_valid(y):
-        return False
+        raise Exeption("Second value not valid version string")
     else:
         return True
 
@@ -50,16 +98,16 @@ def check_valid(x, y):
 def determine_valid(x):
     """ Ensure that variables match semantic guidelines """
     version_split = x.split(".")
-    """ If version is only one place, fail """
-    if len(version_split) < 2:
-        return False
+    """ If version is only one place or more than 3, fail """
+    if len(version_split) < 2 or len(version_split) > 3:
+        raise Exception("Defies semantic versioning for places")
     """ If version has a zero prefix, fail """
     for place in version_split:
         if (place[:1] == "0") and (len(place) > 1):
-            return False
+            raise Exception("Invalid version, leading zero")
     """ If first two places are zero, fail """
     if len(version_split) >= 2:
         if (version_split[0] == "0") and (version_split[1] == "0"):
-            return False
+            raise Exception("Invalid version, first two places cannot be zero")
     """ If valid string, return True """
     return True
